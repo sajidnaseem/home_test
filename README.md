@@ -64,6 +64,9 @@ Single-page sticky notes app built with React, TypeScript, Redux Toolkit, and RT
 
 ## Architecture Design
 
+![Architecture Diagram](docs/images/architecture-diagram.png)
+
+
 The application follows a feature-first, layered front-end architecture. Rendering starts in `main.tsx`, where the Redux store is provided to the app. `App.tsx` orchestrates global UI state (note creation mode and draft settings), mounts the toolbar, and delegates board interactions to the notes feature. State management is centralized in `notesSlice`, which stores note entities and interaction metadata (active note, drag/resize mode, pointer offsets, trash hover, and sync status). This creates a predictable, reducer-driven flow for all interactive operations.
 
 The notes feature is organized by responsibility: `Board` handles pointer lifecycle and board-space coordinate calculations, `NoteCard` encapsulates per-note UI/edit interactions, and `TrashZone` provides visual delete feedback. Domain utilities (`geometry.ts`) enforce constraints such as clamped size and board-bounded positioning, while selectors provide stable read access patterns (`selectOrderedNotes`, `selectInteraction`, `selectSyncStatus`). The result is a clean split between presentation, interaction logic, and domain rules.
@@ -85,4 +88,3 @@ Persistence uses a dual-source strategy implemented in `useNotesSync`. Notes are
 
 - Type check: `npm run typecheck`
 - Lint: `npm run lint`
-  > > > > > > > 545e901 (Initial commit: sticky notes SPA)
